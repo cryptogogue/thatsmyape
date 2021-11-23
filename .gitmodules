@@ -1,0 +1,3 @@
+[submodule "src/packages/fgc-common-js-src"]
+	path = src/packages/fgc-common-js-src
+	url = git@github.com:fallguyconsulting/fgc-common-js-src.git

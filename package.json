@@ -1,0 +1,237 @@
+{
+    "name": "thatsmyape",
+    "version": "0.0.1",
+    "dependencies": {
+        "@babel/core": "^7.12.10",
+        "@babel/plugin-proposal-decorators": "^7.12.12",
+        "@babel/runtime": "^7.12.5",
+        "@svgr/webpack": "4.3.2",
+        "@typescript-eslint/eslint-plugin": "^2.34.0",
+        "@typescript-eslint/parser": "^2.34.0",
+        "babel-eslint": "10.0.3",
+        "babel-jest": "^24.9.0",
+        "babel-loader": "8.0.6",
+        "babel-plugin-import": "^1.13.3",
+        "babel-plugin-jsx-control-statements": "^4.1.0",
+        "babel-plugin-named-asset-import": "^0.3.7",
+        "babel-plugin-styled-components": "^1.12.0",
+        "bcryptjs": "^2.4.3",
+        "bip39": "^2.6.0",
+        "bitcoinjs-lib": "^5.2.0",
+        "bluebird": "^3.7.2",
+        "camelcase": "^5.2.0",
+        "case-sensitive-paths-webpack-plugin": "2.2.0",
+        "changedpi": "^1.0.4",
+        "color": "^3.1.3",
+        "crypto-js": "^3.1.9-1",
+        "css-loader": "2.1.1",
+        "customize-cra": "^0.2.9",
+        "dotenv": "6.2.0",
+        "dotenv-expand": "5.1.0",
+        "file-loader": "3.0.1",
+        "file-saver": "^2.0.5",
+        "fs-extra": "7.0.1",
+        "glamor": "^2.20.40",
+        "handlebars": "^4.7.7",
+        "html-webpack-plugin": "4.0.0-beta.5",
+        "identity-obj-proxy": "3.0.0",
+        "is-wsl": "^1.1.0",
+        "jest": "24.9.0",
+        "jest-environment-jsdom-fourteen": "0.1.0",
+        "jest-resolve": "24.9.0",
+        "jest-watch-typeahead": "0.4.0",
+        "js-crypto-key-utils": "^0.5.15",
+        "jsencrypt": "^3.0.1",
+        "jszip": "^3.5.0",
+        "jwt-decode": "^2.2.0",
+        "luxon": "^1.27.0",
+        "mini-css-extract-plugin": "0.8.0",
+        "mobx": "^5.15.7",
+        "mobx-react": "^6.3.1",
+        "mobx-utils": "^5.6.2",
+        "njwt": "^1.0.0",
+        "node-jsencrypt": "^1.0.0",
+        "npm": "^6.14.11",
+        "ohm-js": "^0.14.0",
+        "opentype.js": "^1.3.3",
+        "optimize-css-assets-webpack-plugin": "5.0.3",
+        "pnp-webpack-plugin": "1.5.0",
+        "postcss-flexbugs-fixes": "4.1.0",
+        "postcss-loader": "3.0.0",
+        "postcss-normalize": "7.0.1",
+        "postcss-preset-env": "6.7.0",
+        "postcss-safe-parser": "4.0.1",
+        "qrcode-generator": "^1.4.4",
+        "radium": "^0.26.1",
+        "react": "^16.14.0",
+        "react-app-polyfill": "^1.0.4",
+        "react-clear-cache": "^1.4.12",
+        "react-color": "^2.19.3",
+        "react-dev-utils": "^9.1.0",
+        "react-dom": "^16.14.0",
+        "react-dropzone": "^10.2.2",
+        "react-json-tree": "^0.11.2",
+        "react-keyboard-event-handler": "^1.5.4",
+        "react-markdown": "^7.1.0",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "^3.4.4",
+        "react-virtualized-auto-sizer": "^1.0.4",
+        "react-window": "^1.8.6",
+        "react-window-infinite-loader": "^1.0.5",
+        "resolve": "1.12.0",
+        "resolve-url-loader": "^3.1.2",
+        "sass-loader": "7.2.0",
+        "saxen": "^8.1.2",
+        "secp256k1": "^3.7.1",
+        "secure-random": "^1.1.2",
+        "semantic-ui-css": "^2.4.1",
+        "semantic-ui-react": "^0.88.0",
+        "semver": "6.3.0",
+        "style-loader": "1.0.0",
+        "terser-webpack-plugin": "1.4.1",
+        "ts-pnp": "1.1.4",
+        "url": "^0.11.0",
+        "url-loader": "2.1.0",
+        "usps-webtools": "^1.0.5",
+        "uuid": "^3.3.3",
+        "uuidv4": "^6.2.11",
+        "validator": "^10.11.0",
+        "webpack": "4.41.0",
+        "webpack-dev-server": "^3.11.2",
+        "webpack-manifest-plugin": "2.1.1",
+        "workbox-webpack-plugin": "4.3.1",
+        "xlsx": "^0.15.6"
+    },
+    "scripts": {
+        "start": "node scripts/start.js",
+        "build": "node scripts/build.js",
+        "prebuild": "npm run generate-build-meta",
+        "generate-build-meta": "./node_modules/react-clear-cache/bin/cli.js",
+        "test": "node scripts/test.js --env=jsdom"
+    },
+    "eslintConfig": {
+        "parserOptions": {
+            "ecmaVersion": 6,
+            "sourceType": "module",
+            "ecmaFeatures": {
+                "jsx": true
+            }
+        },
+        "plugins": [
+            "jsx-control-statements"
+        ],
+        "extends": "react-app",
+        "rules": {
+            "jsx-control-statements/jsx-choose-not-empty": 1,
+            "jsx-control-statements/jsx-for-require-each": 1,
+            "jsx-control-statements/jsx-for-require-of": 1,
+            "jsx-control-statements/jsx-if-require-condition": 1,
+            "jsx-control-statements/jsx-otherwise-once-last": 1,
+            "jsx-control-statements/jsx-use-if-tag": 1,
+            "jsx-control-statements/jsx-when-require-condition": 1,
+            "jsx-control-statements/jsx-jcs-no-undef": 1,
+            "no-undef": 0,
+            "camelcase": 1
+        },
+        "env": {
+            "jsx-control-statements/jsx-control-statements": true
+        }
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not ie <= 9",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "jest": {
+        "roots": [
+            "<rootDir>/src"
+        ],
+        "collectCoverageFrom": [
+            "src/**/*.{js,jsx,ts,tsx}",
+            "!src/**/*.d.ts"
+        ],
+        "setupFiles": [
+            "react-app-polyfill/jsdom"
+        ],
+        "setupFilesAfterEnv": [],
+        "testMatch": [
+            "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+            "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+        ],
+        "testEnvironment": "jest-environment-jsdom-fourteen",
+        "transform": {
+            "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+            "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+            "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+        },
+        "transformIgnorePatterns": [
+            "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+            "^.+\\.module\\.(css|sass|scss)$"
+        ],
+        "modulePaths": [],
+        "moduleNameMapper": {
+            "^react-native$": "react-native-web",
+            "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+        },
+        "moduleFileExtensions": [
+            "web.js",
+            "js",
+            "web.ts",
+            "ts",
+            "web.tsx",
+            "tsx",
+            "json",
+            "web.jsx",
+            "jsx",
+            "node"
+        ],
+        "watchPlugins": [
+            "jest-watch-typeahead/filename",
+            "jest-watch-typeahead/testname"
+        ]
+    },
+    "babel": {
+        "presets": [
+            [
+                "react-app"
+            ]
+        ],
+        "env": {
+            "production": {}
+        },
+        "plugins": [
+            [
+                "module-resolver",
+                {
+                    "root": [
+                        "./src"
+                    ],
+                    "alias": {
+                        "consts": "./src/consts/consts",
+                        "fgc": "./src/packages/fgc-common-js-src/export",
+                        "userdb": "./src/packages/fgc-userdb-js-src/export"
+                    }
+                }
+            ],
+            "jsx-control-statements",
+            "babel-plugin-styled-components",
+            [
+                "@babel/plugin-proposal-decorators",
+                {
+                    "legacy": true
+                }
+            ]
+        ]
+    },
+    "devDependencies": {
+        "babel-plugin-module-resolver": "^3.2.0"
+    }
+}
