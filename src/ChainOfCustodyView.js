@@ -174,8 +174,6 @@ export const ChainOfCustodyView = observer (( props ) => {
         ); 
     }
 
-    console.log ( 'CHAIN OF CUSTODY VIEW' );
-
     return (
         <React.Fragment>
             <ChainOfCustodyHeaderView chain = { chain }/>

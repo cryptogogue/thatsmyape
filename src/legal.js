@@ -49,6 +49,12 @@ Again, it should go without saying for an Open Beta, but our legal counsel remin
 
 - **Title**: {{ TITLE }}
 - **Description**: {{ DESCRIPTION }}
+{{#if AUTHOR_NAME}}
+- **Author Name**: {{ AUTHOR_NAME }}
+{{/if}}
+{{#if AUTHOR_EMAIL}}
+- **Author Email**: {{ AUTHOR_EMAIL }}
+{{/if}}
 {{#if COPYRIGHT_REGISTRATION}}
 - **Registration No.**: {{ COPYRIGHT_REGISTRATION }}
 {{/if}}

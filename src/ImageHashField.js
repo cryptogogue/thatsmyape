@@ -114,6 +114,8 @@ export class ImageInfoController {
 
         this.reset ();
 
+        if ( !url ) return;
+
         if ( !( url && validator.isURL ( url, { require_protocol: true, require_valid_protocol: true, protocols: [ 'http', 'https' ]}))) {
             this.setError ( `Please enter a valid URL (including protocol).` );
             return;

@@ -25,6 +25,8 @@ class NewChainController {
     @observable title               = '';
     @observable description         = '';
     @observable registrationNo      = '';
+    @observable authorName          = '';
+    @observable authorEmail         = '';
     @observable imageURL            = '';
     @observable imageHash           = '';
     @observable thumbnail           = '';
@@ -53,11 +55,25 @@ class NewChainController {
             TITLE:                      this.title,
             DESCRIPTION:                this.description,
             COPYRIGHT_REGISTRATION:     this.registrationNo,
+            AUTHOR_NAME:                this.authorName,
+            AUTHOR_EMAIL:               this.authorEmail,
             IMAGE_URL:                  this.imageInfo.imageURL,
             IMAGE_HASH:                 this.imageInfo.imageHash,
             THUMBNAIL:                  this.imageInfo.thumbnail,
             DATE_TIME:                  this.dateTime,
         };
+    }
+
+    //----------------------------------------------------------------//
+    @action
+    setAuthorName ( authorName ) {
+        this.authorName = authorName;
+    }
+
+    //----------------------------------------------------------------//
+    @action
+    setAuthorEmail ( authorEmail ) {
+        this.authorEmail = authorEmail;
     }
 
     //----------------------------------------------------------------//
@@ -143,6 +159,19 @@ export const NewChainForm = observer (( props ) => {
                             value           = { controller.description }
                             onChange        = {( event ) => { controller.setDescription ( event.target.value )}} 
                         />
+                        <UI.Form.Group widths = 'equal'>
+                            <UI.Form.Input
+                                label           = 'Author Name'
+                                placeholder     = 'Author name'
+                                value           = { controller.authorName }
+                                onChange        = {( event ) => { controller.setAuthorName ( event.target.value )}} 
+                            />
+                            <fgc.EmailField
+                                icon            = { false }
+                                label           = 'Author Email'
+                                onEmail         = {( email ) => { controller.setAuthorEmail ( email )}} 
+                            />
+                        </UI.Form.Group>
                         <UI.Form.Group widths = 'equal'>
                             <UI.Form.Input
                                 label           = 'Copright Registration Number'
