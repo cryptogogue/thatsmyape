@@ -152,7 +152,7 @@ export const DMCAModal = observer (( props ) => {
     const [ signatureModal, setSignatureModal ]     = useState ( false );
 
     const checkSigningKey = ( key ) => {
-        if ( chain.currentOwnerKey.publicPEM !== key.publicPEM ) {
+        if ( !chain.currentOwnerKey.publicIsMatch ( key )) {
             return 'Private signing key must match public key of current contract owner.';
         }
     }

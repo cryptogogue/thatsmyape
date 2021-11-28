@@ -82,7 +82,7 @@ export const TransferTitleModal = observer (( props ) => {
     const [ signatureModal, setSignatureModal ]     = useState ( false );
 
     const checkRecipientKey = ( key ) => {
-        if ( chain.currentOwnerKey.publicPEM === key.publicPEM ) {
+        if ( chain.currentOwnerKey.publicIsMatch ( key )) {
             return 'Recipient public key should be different than public key of current contract owner.';
         }
     }
@@ -92,7 +92,7 @@ export const TransferTitleModal = observer (( props ) => {
     }
 
     const checkSigningKey = ( key ) => {
-        if ( chain.currentOwnerKey.publicPEM !== key.publicPEM ) {
+        if ( !chain.currentOwnerKey.publicIsMatch ( key )) {
             return 'Private signing key must match public key of current contract owner.';
         }
     }

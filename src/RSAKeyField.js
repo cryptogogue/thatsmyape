@@ -19,9 +19,13 @@ export const RSAKeyField = observer (( props ) => {
 
     const { onRSAKey, privateKey, checkKey } = props;
 
-    const [ pem, setPEM ]           = useState ( props.pem || '' );
-    const [ key, setKey ]           = useState ( props.key || false );
-    const [ error, setError ]       = useState ( false );
+    const [ pem, setPEM ]               = useState ( props.pem || '' );
+    const [ key, setKey ]               = useState ( props.key || false );
+    const [ error, setError ]           = useState ( false );
+
+    const [ needsPassword, setNeedsPassword ]   = useState ( false );
+    const [ password, setPassword ]             = useState ( '' );
+    const [ passwordError, setPasswordError ]   = useState ( false );
 
     if ( props.key ) {
         return (
@@ -38,35 +42,68 @@ export const RSAKeyField = observer (( props ) => {
         );
     }
 
-    const loadPEM = ( text ) => {
+    const innerLoadKeyAsync = async ( text, pw ) => {
 
+        setError ( false );
+        setPasswordError ( false );
         setKey ( false );
         onRSAKey ( false );
         props.onPEM && props.onPEM ( '' );
 
+        try {
+
+            const rsaKey = await fgc.crypto.loadKeyAsync ( text, pw );
+
+            if ( rsaKey.type !== fgc.crypto.CRYPTO_KEY_TYPE.RSA ) {
+                setError ( 'Not an RSA key.' );
+                return;
+            }
+
+            if ( privateKey && !rsaKey.hasPrivate ) {
+                setError ( 'Missing private key.' );
+                return;
+            }
+
+            const checkKeyError = checkKey ? checkKey ( rsaKey ) : false;
+            if ( checkKeyError ) {
+                setError ( checkKeyError );
+                return;
+            }
+
+            setKey ( rsaKey );
+            onRSAKey ( rsaKey );
+            props.onPEM && props.onPEM ( text );
+        }
+        catch ( error ) {
+            if ( error instanceof pem.PEMPasswordError ) throw error;
+            console.log ( error );
+            setError ( 'Invalid RSA PEM.' );
+        }
+    }
+
+    const loadPEM = async ( text ) => {
+
+        setPassword ( '' );
+        setNeedsPassword ( false );
+
         if ( text ) {
             try {
-                const rsaKey = new fgc.crypto.RSAKey ( text );
-
-                if ( privateKey && !rsaKey.hasPrivate ) {
-                    setError ( 'RSA PEM missing private key.' );
-                    return;
-                }
-
-                const checkKeyError = checkKey ? checkKey ( rsaKey ) : false;
-                if ( checkKeyError ) {
-                    setError ( checkKeyError );
-                    return;
-                }
-
-                const newKey = new fgc.crypto.RSAKey ( text );
-                setKey ( newKey );
-                onRSAKey ( newKey );
-                props.onPEM && props.onPEM ( text );
+                await innerLoadKeyAsync ( text );
             }
             catch ( error ) {
-                console.log ( error );
-                setError ( 'Invalid RSA PEM.' );
+                setNeedsPassword ( true );
+            }
+        }
+    }
+
+    const loadPEMWithPassword = async ( text, pw ) => {
+
+        if ( text && pw ) {
+            try {
+                await innerLoadKeyAsync ( text, pw );
+            }
+            catch ( error ) {
+                setPasswordError ( 'Password is incorrect.' );
             }
         }
     }
@@ -77,18 +114,29 @@ export const RSAKeyField = observer (( props ) => {
         loadPEM ( text );
     }
 
-    const onChange = ( event ) => {
+    const onChangePEM = ( event ) => {
         setError ( false );
         setPEM ( event.target.value );
     }
 
-    const onBlur = () => {
+    const onBlurPEM = () => {
         loadPEM ( pem );
+    }
+
+    const onChangePW = ( event ) => {
+        setPasswordError ( false );
+        setPassword ( event.target.value );
+    }
+
+    const onBlurPW = () => {
+        loadPEMWithPassword ( pem, password );
     }
 
     const onKeyPress = ( event ) => {
         if ( event.key === 'Enter' ) {
             event.target.blur ();
+            event.stopPropagation ();
+            event.preventDefault ();
         }
     }
 
@@ -108,11 +156,26 @@ export const RSAKeyField = observer (( props ) => {
                 rows            = { 8 }
                 placeholder     = 'RSA key in PEM format'
                 value           = { pem }
-                onChange        = { onChange }
-                onBlur          = { onBlur }
+                onChange        = { onChangePEM }
+                onBlur          = { onBlurPEM }
                 onKeyPress      = { onKeyPress }
                 error           = { error }
             />
+
+            <If condition = { needsPassword }>
+                <UI.Form.Input
+                    fluid
+                    icon            = {( !Boolean ( key )) ? 'lock' : 'unlock' }
+                    iconPosition    = 'left'
+                    placeholder     = 'Password'
+                    type            = 'password'
+                    value           = { password }
+                    onChange        = { onChangePW }
+                    onBlur          = { onBlurPW }
+                    onKeyPress      = { onKeyPress }
+                    error           = { passwordError }
+                />
+            </If>
         </React.Fragment>
     );
 });

@@ -40,7 +40,7 @@ export const SignInBrowserModal = observer (( props ) => {
             if ( error ) return error;
         }
 
-        if ( props.expectedKey && ( props.expectedKey.publicPEM !== key.publicPEM )) {
+        if ( props.expectedKey && ( !props.expectedKey.publicIsMatch ( key ))) {
             return 'Loaded key did not match expected key.';
         }
     }
