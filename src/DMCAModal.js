@@ -12,6 +12,8 @@ import JSZip                                    from 'jszip';
 import React, { useState }                      from 'react';
 import * as UI                                  from 'semantic-ui-react';
 
+const DEFAULT_ATTENTION = 'To Whom it May Concern';
+
 //----------------------------------------------------------------//
 function wrapString ( str, width ) {
 
@@ -35,21 +37,24 @@ function wrapString ( str, width ) {
 class DMCAController {
 
     @observable draft           = '';
+    @observable attention       = DEFAULT_ATTENTION;
     @observable infringement    = '';
     @observable contactName     = '';
     @observable contactEmail    = '';
+    @observable contactAddress  = '';
+    @observable contactPhone    = '';
     @observable when            = new Date ();
+
+    //----------------------------------------------------------------//
+    @computed get
+    canSign () {
+        return Boolean ( this.attention && this.infringement && this.contactName && this.contactEmail );
+    }
 
     //----------------------------------------------------------------//
     constructor ( chain ) {
         this.chain = chain;
         this.setDraft ( legal.DMCA_NOTICE );
-    }
-
-    //----------------------------------------------------------------//
-    @computed get
-    canSign () {
-        return Boolean ( this.infringement && this.contactName && this.contactEmail );
     }
 
     //----------------------------------------------------------------//
@@ -101,12 +106,27 @@ class DMCAController {
 
         return {
             TITLE:              head.TITLE,
-            THUMBNAIL:          head.THUMBNAIL,
+            ATTENTION:          this.attention,
             INFRINGEMENT:       this.infringement,
             CONTACT_NAME:       this.contactName,
             CONTACT_EMAIL:      this.contactEmail,
+            CONTACT_ADDRESS:    this.contactAddress,
+            CONTACT_PHONE:      this.contactPhone,
+            PUBLIC_KEY:         this.chain.currentOwnerKey.publicPEM,
             DATE_TIME:          this.when.toLocaleString (),
         };
+    }
+
+    //----------------------------------------------------------------//
+    @action
+    setAttention ( attention ) {
+        this.attention = attention;
+    }
+
+    //----------------------------------------------------------------//
+    @action
+    setContactAddress ( address ) {
+        this.contactAddress = address;
     }
 
     //----------------------------------------------------------------//
@@ -119,6 +139,12 @@ class DMCAController {
     @action
     setContactName ( contactName ) {
         this.contactName = contactName;
+    }
+
+    //----------------------------------------------------------------//
+    @action
+    setContactPhone ( phone ) {
+        this.contactPhone = phone;
     }
 
     //----------------------------------------------------------------//
@@ -182,17 +208,37 @@ export const DMCAModal = observer (( props ) => {
                 <UI.Segment>
                     <UI.Form>
                         <UI.Form.Input
-                            label           = 'Contact Name'
-                            placeholder     = 'Countract Name'
-                            value           = { controller.contactName }
-                            onChange        = {( event ) => { controller.setContactName ( event.target.value )}} 
+                            label           = 'Attention'
+                            placeholder     = 'To Whom it May Concern'
+                            value           = { controller.attention }
+                            onChange        = {( event ) => { controller.setAttention ( event.target.value )}} 
                         />
-                        <UI.Form.Input
-                            label           = 'Contact Email'
-                            placeholder     = 'Countract Email'
-                            value           = { controller.contactEmail }
-                            onChange        = {( event ) => { controller.setContactEmail ( event.target.value )}} 
-                        />
+                        <UI.Form.Group widths = 'equal'>
+                            <UI.Form.Input
+                                label           = 'Contact Name'
+                                placeholder     = 'Contact Name'
+                                value           = { controller.contactName }
+                                onChange        = {( event ) => { controller.setContactName ( event.target.value )}} 
+                            />
+                            <fgc.EmailField
+                                icon            = { false }
+                                label           = 'Contact Email'
+                                onEmail         = {( email ) => { controller.setContactEmail ( email )}} 
+                            />
+                        </UI.Form.Group>
+                        <UI.Form.Group widths = 'equal'>
+                            <UI.Form.Input
+                                label           = 'Contact Mailing Address'
+                                placeholder     = 'Contact Mailing Address'
+                                value           = { controller.contactAddress }
+                                onChange        = {( event ) => { controller.setContactAddress ( event.target.value )}} 
+                            />
+                            <fgc.PhoneField
+                                icon            = { false }
+                                label           = 'Contact Phone'
+                                onPhone         = {( phone ) => { controller.setContactPhone ( phone )}} 
+                            />
+                        </UI.Form.Group>
                         <UI.Form.TextArea
                             rows            = { 4 }
                             label           = 'Location(s) of Infringement'

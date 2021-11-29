@@ -3,6 +3,7 @@
 import { observer }                             from 'mobx-react';
 import * as fgc                                 from 'fgc';
 import React, { useState }                      from 'react';
+import { useDropzone }                          from 'react-dropzone'
 import * as UI                                  from 'semantic-ui-react';
 
 export const CRYPTO_FIELD_STYLE = {
@@ -52,10 +53,10 @@ export const RSAKeyField = observer (( props ) => {
 
         try {
 
-            const rsaKey = await fgc.crypto.loadKeyAsync ( text, pw );
+            let rsaKey = await fgc.crypto.loadKeyAsync ( text, pw );
 
             if ( rsaKey.type !== fgc.crypto.CRYPTO_KEY_TYPE.RSA ) {
-                setError ( 'Not an RSA key.' );
+                setError ( 'Not an RSA key. Did you load an EC key by mistake?' );
                 return;
             }
 
@@ -64,18 +65,23 @@ export const RSAKeyField = observer (( props ) => {
                 return;
             }
 
+            if ( !privateKey ) {
+                rsaKey = new fgc.crypto.RSAKey ( rsaKey.publicPEM );
+                setPEM ( rsaKey.publicPEM );
+            }
+
             const checkKeyError = checkKey ? checkKey ( rsaKey ) : false;
             if ( checkKeyError ) {
                 setError ( checkKeyError );
                 return;
             }
 
-            setKey ( rsaKey );
+            setKey ( rsaKey );            
             onRSAKey ( rsaKey );
             props.onPEM && props.onPEM ( text );
         }
         catch ( error ) {
-            if ( error instanceof pem.PEMPasswordError ) throw error;
+            if ( error instanceof fgc.pem.PEMPasswordError ) throw error;
             console.log ( error );
             setError ( 'Invalid RSA PEM.' );
         }
@@ -140,6 +146,21 @@ export const RSAKeyField = observer (( props ) => {
         }
     }
 
+    const onDrop = async ( acceptedFiles ) => {
+        if ( acceptedFiles.length === 0 ) return;
+        try {
+            const text = await acceptedFiles [ 0 ].text ();
+            if ( text ) {
+                loadFromFile ( text );
+            }
+        }
+        catch ( error ) {
+            console.log ( error );
+        }
+    }
+
+    const { getRootProps } = useDropzone ({ onDrop: onDrop, maxFiles: 1 });
+
     return (
 
         <React.Fragment>
@@ -150,17 +171,19 @@ export const RSAKeyField = observer (( props ) => {
                     accept      = { '.pem' }
                 />
             </UI.Menu>
-            <UI.Form.TextArea
-                attached        = 'bottom'
-                style           = { CRYPTO_FIELD_STYLE }
-                rows            = { 8 }
-                placeholder     = 'RSA key in PEM format'
-                value           = { pem }
-                onChange        = { onChangePEM }
-                onBlur          = { onBlurPEM }
-                onKeyPress      = { onKeyPress }
-                error           = { error }
-            />
+            <div { ...getRootProps ()}>
+                <UI.Form.TextArea
+                    attached        = 'bottom'
+                    style           = { CRYPTO_FIELD_STYLE }
+                    rows            = { 8 }
+                    placeholder     = { props.placeholder || 'RSA key in PEM format' }
+                    value           = { pem }
+                    onChange        = { onChangePEM }
+                    onBlur          = { onBlurPEM }
+                    onKeyPress      = { onKeyPress }
+                    error           = { error }
+                />
+            </div>
 
             <If condition = { needsPassword }>
                 <UI.Form.Input

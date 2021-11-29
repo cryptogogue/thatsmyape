@@ -11,9 +11,13 @@ const STORAGE_KEY = 'thatsmyape.coc';
 //================================================================//
 export class ChainOfCustody {
 
-    @observable entries     = [];
+    @observable entries             = [];
 
-    @computed get length    () { return this.entries.length; }
+    //----------------------------------------------------------------//
+    @computed get currentOwnerKey   () { return new fgc.crypto.RSAKey ( this.getMostRecentContractFieldValue ( 'PUBLIC_KEY' )); }
+    @computed get governingLaw      () { return this.getMostRecentContractFieldValue ( 'GOVERNING_LAW' ); }
+    @computed get length            () { return this.entries.length; }
+    @computed get venue             () { return this.getMostRecentContractFieldValue ( 'VENUE' ); }
 
     //----------------------------------------------------------------//
     @action
@@ -50,7 +54,7 @@ export class ChainOfCustody {
 
             const entry             = this.entries [ i ];
             const signingEntry      = this.entries [ i - ( i > 0 ? 1 : 0 )];
-            const signingPEM        = signingEntry.fields.RECIPIENT_PEM || signingEntry.signature.keyInfo.publicKey ;
+            const signingPEM        = signingEntry.fields.PUBLIC_KEY;
             const signingKey        = new fgc.crypto.RSAKey ( signingPEM );
             const fullText          = handlebars.compile ( entry.draft, { noEscape: true })( entry.fields );
 
@@ -71,12 +75,12 @@ export class ChainOfCustody {
     }
 
     //----------------------------------------------------------------//
-    @computed get
-    currentOwnerKey () {
-
-        const entry = this.entries [ this.length - 1 ];
-        const pem = entry.fields.RECIPIENT_PEM || entry.signature.keyInfo.publicKey;
-        return new fgc.crypto.RSAKey ( pem );
+    getMostRecentContractFieldValue ( fieldName, fallback ) {
+        let value = fallback !== undefined ? fallback : '';
+        for ( let contract of this.contracts ) {
+            value = contract.fields [ fieldName ] || value;
+        }
+        return value;
     }
 
     //----------------------------------------------------------------//

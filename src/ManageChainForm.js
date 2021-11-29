@@ -80,7 +80,7 @@ export const ManageChainForm = observer (( props ) => {
                         color = 'teal'
                         onClick = {() => { setModal ( MODAL.TRANSER_TITLE ); }}
                     >
-                        Transfer Title
+                        Transfer Ownership
                     </UI.Button>
                     <UI.Button
                         color = 'teal'

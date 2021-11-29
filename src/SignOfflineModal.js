@@ -6,6 +6,7 @@ import FileSaver                                from 'file-saver';
 import { observer }                             from 'mobx-react';
 import * as fgc                                 from 'fgc';
 import React, { useState }                      from 'react';
+import { useDropzone }                          from 'react-dropzone'
 import ReactMarkdown                            from 'react-markdown'
 import * as UI                                  from 'semantic-ui-react';
 
@@ -46,17 +47,33 @@ export const SignOfflineModal = observer (( props ) => {
 
     const checkSig = ( base64Sig, key ) => {
 
+        console.log ( 'CHECK SIG:', base64Sig );
+
         setSigError ( false );
         setVerified ( false );
 
         if ( !( base64Sig && key )) return;
 
-        const error = props.checkSignature && props.checkSignature ( signature );
-        if ( error ) {
-            setSigError ( error );
-            return;
+        console.log ( 'CHECK SIG:' );
+
+        try {
+            
+            const error = props.checkSignature && props.checkSignature ( signature );
+            
+            if ( error ) {
+                setSigError ( error );
+                return;
+            }
+            
+            if ( key.verify ( text, base64Sig, 'base64' )) {
+                setVerified ( true );
+                return;
+            }
         }
-        setVerified ( key.verify ( text, base64Sig, 'base64' ));
+        catch ( error ) {
+            console.log ( error );
+        }
+        setSigError ( 'Invalid signature.' );
     }
 
     const loadFromFile = ( text ) => {
@@ -92,6 +109,21 @@ export const SignOfflineModal = observer (( props ) => {
         };
         onDone ( signature );
     }
+
+    const onDrop = async ( acceptedFiles ) => {
+        if ( acceptedFiles.length === 0 ) return;
+        try {
+            const text = await acceptedFiles [ 0 ].text ();
+            if ( text ) {
+                loadFromFile ( text );
+            }
+        }
+        catch ( error ) {
+            console.log ( error );
+        }
+    }
+
+    const { getRootProps } = useDropzone ({ onDrop: onDrop, maxFiles: 1 });
 
     return (
         <UI.Modal
@@ -152,17 +184,19 @@ export const SignOfflineModal = observer (( props ) => {
                                         accept      = { '.base64' }
                                     />
                                 </UI.Menu>
-                                <UI.Form.TextArea
-                                    attached        = 'bottom'
-                                    style           = { CRYPTO_FIELD_STYLE }
-                                    rows            = { 8 }
-                                    placeholder     = 'RSA signature in base64 format'
-                                    value           = { base64Sig }
-                                    onChange        = { onChange }
-                                    onBlur          = { onBlur }
-                                    onKeyPress      = { onKeyPress }
-                                    error           = { sigError }
-                                />
+                                <div { ...getRootProps ()}>
+                                    <UI.Form.TextArea
+                                        attached        = 'bottom'
+                                        style           = { CRYPTO_FIELD_STYLE }
+                                        rows            = { 8 }
+                                        placeholder     = 'RSA signature in base64 format'
+                                        value           = { base64Sig }
+                                        onChange        = { onChange }
+                                        onBlur          = { onBlur }
+                                        onKeyPress      = { onKeyPress }
+                                        error           = { sigError }
+                                    />
+                                </div>
                             </When>
                         </Choose>
                     </UI.Segment>

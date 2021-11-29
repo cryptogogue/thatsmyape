@@ -10,17 +10,19 @@ configure ({
 
 import { MainScreen }                       from './MainScreen';
 import registerServiceWorker                from './util/registerServiceWorker';
+import { TermsOfServiceModal }              from './TermsOfServiceModal'
 import * as fgc                             from 'fgc';
-import React                                from 'react';
+import React, { useState }                  from 'react';
 import { useClearCache }                    from 'react-clear-cache';
 import ReactDOM                             from 'react-dom';
-import { BrowserRouter, Route, Switch, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
 
 //----------------------------------------------------------------//
 const App = () => {
 
-    const { isLatestVersion, emptyCacheStorage } = useClearCache ();
-    const location = useLocation ();
+    const [ showTOS, setShowTOS ]                   = useState ( false );
+    const { isLatestVersion, emptyCacheStorage }    = useClearCache ();
+    const location                                  = useLocation ();
 
     if ( !isLatestVersion ) {
         console.log ( 'NEW VERSION DETECTED; EMPTYING CACHE' );
@@ -63,7 +65,17 @@ const App = () => {
                 textAlign:          'center',
                 width:              '100%',
             }}>
-                { `${ pkg.name } ${ pkg.version }` }
+                <p
+                    style       = {{ cursor: 'pointer' }}
+                    onClick     = {() => { setShowTOS ( true )}}
+                >
+                    { `Copyright © 2021 by Cryptogogue, Inc. - Terms of Service - v${ pkg.version }` }
+                </p>
+                <If condition = { showTOS }>
+                    <TermsOfServiceModal
+                        onDone      = {() => { setShowTOS ( false )}}
+                    />
+                </If>
             </div>
         </div>
     );

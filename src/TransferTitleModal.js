@@ -17,19 +17,23 @@ import * as UI                                  from 'semantic-ui-react';
 class TransferTitleController {
 
     @observable draft           = '';
-    @observable recipientPEM    = '';
+    @observable publicKey       = false;
     @observable dateTime        = ( new Date ()).toLocaleString ();
+    @observable governingLaw    = '';
+    @observable venue           = '';
+
+    //----------------------------------------------------------------//
+    @computed get
+    canSign () {
+        return this.publicKey && this.governingLaw && this.venue;
+    }
 
     //----------------------------------------------------------------//
     constructor ( chain ) {
         this.chain = chain;
         this.setDraft ( legal.TRANSFER_TITLE );
-    }
-
-    //----------------------------------------------------------------//
-    @computed get
-    canSign () {
-        return Boolean ( this.recipientPEM );
+        this.setGoverningLaw ( chain.governingLaw );
+        this.setVenue ( chain.venue );
     }
 
     //----------------------------------------------------------------//
@@ -41,10 +45,18 @@ class TransferTitleController {
     //----------------------------------------------------------------//
     @computed get
     fields () {
-        return {
-            RECIPIENT_PEM:      this.recipientPEM,
+        const fields = {
+            PUBLIC_KEY:         this.publicKey.publicPEM,
             DATE_TIME:          this.dateTime,
         };
+
+        if (( this.governingLaw !== this.chain.governingLaw ) || ( this.venue !== this.chain.venue )) {
+            fields.CHANGE_VENUE     = true;
+            fields.GOVERNING_LAW    = this.governingLaw || this.chain.governingLaw;
+            fields.VENUE            = this.venue || this.chain.venue;
+        }
+
+        return fields;
     }
 
     //----------------------------------------------------------------//
@@ -55,8 +67,20 @@ class TransferTitleController {
 
     //----------------------------------------------------------------//
     @action
-    setRecipientPEM ( recipientPEM ) {
-        this.recipientPEM = recipientPEM;
+    setGoverningLaw ( governingLaw ) {
+        this.governingLaw = governingLaw;
+    }
+
+    //----------------------------------------------------------------//
+    @action
+    setPublicKey ( key ) {
+        this.publicKey = key || false;
+    }
+
+    //----------------------------------------------------------------//
+    @action
+    setVenue ( venue ) {
+        this.venue = venue;
     }
 
     //----------------------------------------------------------------//
@@ -88,7 +112,7 @@ export const TransferTitleModal = observer (( props ) => {
     }
 
     const setRecipientKey = ( key ) => {
-        controller.setRecipientPEM ( key ? key.getPublic ( 'pem' ) : '' );
+        controller.setPublicKey ( key );
     }
 
     const checkSigningKey = ( key ) => {
@@ -111,20 +135,47 @@ export const TransferTitleModal = observer (( props ) => {
             closeIcon
             onClose     = {() => { onDone ( false ); }}
         >
-            <UI.Modal.Header>Transfer Title</UI.Modal.Header>
+            <UI.Modal.Header>Transfer Ownership</UI.Modal.Header>
+
             <UI.Modal.Content>
-                <UI.Form>
-                    <RSAKeyField
-                        onRSAKey    = { setRecipientKey }
-                        checkKey    = { checkRecipientKey }
+
+                <UI.Segment>
+                    <UI.Header as='h3'>Recipient Identity</UI.Header>
+                    <UI.Form>
+                        <RSAKeyField
+                            onRSAKey    = { setRecipientKey }
+                            checkKey    = { checkRecipientKey }
+                        />
+                    </UI.Form>
+                </UI.Segment>
+
+                <UI.Segment>
+                    <UI.Header as='h3'>Contract</UI.Header>
+                    <UI.Form>
+                        <UI.Form.Group widths = 'equal'>
+                            <UI.Form.Input
+                                label           = 'Governing Law'
+                                placeholder     = 'State or Country'
+                                value           = { controller.governingLaw }
+                                onChange        = {( event ) => { controller.setGoverningLaw ( event.target.value )}} 
+                            />
+                            <UI.Form.Input
+                                label           = 'Venue'
+                                placeholder     = 'Court or County'
+                                value           = { controller.venue }
+                                onChange        = {( event ) => { controller.setVenue ( event.target.value )}} 
+                            />
+                        </UI.Form.Group>
+                    </UI.Form>
+
+                    <ContractView
+                        draft           = { controller.draft }
+                        setDraft        = {( draft ) => { controller.setDraft ( draft ); }}
+                        contract        = { controller.contract }
                     />
-                </UI.Form>
-                <ContractView
-                    draft           = { controller.draft }
-                    setDraft        = {( draft ) => { controller.setDraft ( draft ); }}
-                    contract        = { controller.contract }
-                />
+                </UI.Segment>
             </UI.Modal.Content>
+
             <UI.Modal.Actions>
                 <UI.Button
                     onClick         = {() => { setSignatureModal ( SIGNATURE_MODAL.IN_BROWSER )}}
