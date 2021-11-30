@@ -4,78 +4,26 @@
 // CONTENT_INTRODUCTION
 //================================================================//
 export const CONTENT_INTRODUCTION = (`
-#### *Show those damn, dirty ape thieves that you're mad as hell and you're not going to take this any more!*
 
-Hey, brah! Tired of trolls using right-click to steal your sweet, sweet NFTs? Well great news! Here's a way to protect your
-assets. And there's **no blockchain involved** - you have everything you need right here in your browser!
+Does owning an NFT grant you any real ownership of the artwork it represents? Do transactions on a blockchain represent a legally actionable chain of custody? Does having a license for "personal" or even "commercial" use of an artwork associated with an NFT enable you to send DMCA takedown notices, or do those rights reside with the original author of the artwork? Are "double spends" of intellectual property licenses really a problem that needs an expensive technical solution, or is simple contract law enough? Are "smart contracts" legally robust enough to stand up in a court of law? And, since blockchains are trustless and do not inherently convey the transfer of rights in any legally meaningful way, do you need a blockchain at all?
 
-## How it Works
-
-*That's My Ape!* runs locally in your browser. You can use it to create a "chain of custody" for your copyrighted artwork.
-The chain of custody tracks ownership and can be used as evidence when you send DMCA takedown notices or try to sue people. We don't
-save anything on a server or blockchain, so you are solely responsible for it's storage and transfer.
+That's why we made *That's My Ape!*, an entirely **blockchain-free** cryptographic chain of custody tool that runs locally in your browser.
 
 ## What You'll Need
 
-To use *That's My Ape!*, you'll just need a **trusted digital identity** issued by a reputable **identity authority** with a corresponding
-RSA private key. You'll also need to register the work you want to protect with a copyright office, and, if you're not the author of the
-work, you'll need documentation showing that you purchased the work or specific rights to it. Don't skip this step - you'll be digitally
-signing a declaration of ownership under penantly of perjury, so if you don't actually own the work in question, that could be embarassing
-for you.
+To use *That's My Ape!*, you'll just need a **trusted digital identity** issued by a reputable **identity authority** with a corresponding RSA private key. You have one of those, right?
+
+You'll also need to register the work you want to protect with a copyright office, and, if you're not the author of the work, you'll need documentation showing that you purchased the work or specific rights to it. Don't skip this step - you'll be digitally signing a declaration of ownership under penalty of perjury, so if you don't actually own the work in question, that could be embarrassing for you.
 
 ## Let's do it!
 
-Just click 'New' below and fill out the form. Don't forget to download the chain of custody when it's complete and store it somewhere safe.
-When you are ready to sell your artwork, reload the chain, transfer ownership to the buyer using their public key, then download the chain
-again and send it to the new owner. If you already have a chain and want to verify or extend it, you can drag-and-drop it anywhere on this
-page to load it.
+Just click 'New' below and fill out the form. Don't forget to download the chain of custody when it's complete and store it somewhere safe. When you are ready to sell your artwork, reload the chain, transfer ownership to the buyer using their public key, then download the chain again and send it to the new owner. If you already have a chain and want to verify or extend it, you can drag-and-drop it anywhere on this page to load it.
 `).trim ();
 
 //================================================================//
 // CONTENT_FAQ
 //================================================================//
 export const CONTENT_FAQ = (`
-## FAQ
-
-#### What even is this thing?
-It's a reactive web app that runs locally in your browser and uses RSA digital signatrues to build chains of custody for licensed artwork.
-
-#### Can I see the source code and run it locally?
-Yes. The source code for *That's My Ape!* is available here and is licensed for local, personal use.
-
-#### Can people really steal artwork by right-clicking?
-No, mere possession of bytes does not prove ownership of a work, as many casual music pirates discovered during the early aughts.
-The more important question is "do I even own the artwork being right-clicked to begin with?" If you just bought an NFT, you
-probably don't.
-
-#### Why should I register my art with a copyright office?
-The DMCA provides legal remedies to limit the unauthorized digital distribution of your artwork, but only if that
-artwork has been registered. It can take a long time to get a copyright registration number, so be sure to apply as soon as you can.
-
-#### Why do I need to use a key associated with a trusted digital identity for signing?
-Because legal complaints need plaintiffs, and to be a plaintiff you need an identity. A real one, not a made-up internet one.
-
-#### How can I demo *That's My Ape!* if I don't yet have a trusted digital identity for some reason?
-Easy. Just generate some RSA key pairs locally using OpenSSH on the command line. *That's My Ape!* can load RSA keys stored in PKCS#1
-and PKCS#8 PEM format. Alternatively, see the 'test keys' provided below.
-
-#### Will you steal my private keys if I load them into the browser?
-Assume that we will and use the "sign offline" functionality instead.
-
-#### I want to buy the rights to someone's artwork. Can I trust their chain of custody?
-There is no trustless way to prove ownership. If push comes to shove, you will need to appear in a court of law and identify
-each person on the chain of custory. So you can trust it as must as you trust each individual participant.
-
-#### What happens if someone sells the same rights to multiple buyers?
-To the extent that's a real problem, it's up to you to decide how to mitigate it. For starters, only buy from reputable sellers
-with strong, publicly known identities. Alternatively, find some trusted third party with which to register the chain of custody.
-That could be a centralized service or even a distributed legder, though we don't see the point of using trustless protocols to
-transact fundamentally trustful legal instruments.
-
-#### Is any of this for real?
-No. Good lord. If you want to protect your digital rights, hire a lawyer. If wasn't immeditaly clear that this is a work of
-satire, we've got some NFTs to sell you.
-
 ## Test Keys
 
 Bob and Alice are real people. Here are their keys. Please don't pretend to be Bob or Alice. It isn't nice.
@@ -149,6 +97,58 @@ oVUQ8RNk96BFgEryuTh3J5iZlgBs3NTv8YotBnV3/i/TCWhXeOZAzAsvWZJAm9Mz
 XcqZ92fEl80zgKTXLwIDAQAB
 -----END PUBLIC KEY-----
 \`\`\`
+
+## FAQ
+
+#### Q. What even is this thing?
+It's a reactive web app that runs locally in your browser and uses RSA digital signatures to build chains of custody for licensed artwork. Oh, you meant what *even is* this thing. Yeah, it's a weekend hackathon/art project that questions assumptions about blockchains and NFTs.
+
+#### Q. Can I see the source code and run it locally?
+Yes. The source code for *That's My Ape!* is available here and is licensed for local, personal use.
+
+#### Q. Can people really steal artwork by right-clicking?
+No. Mere possession of bytes does not prove ownership of a work, as many casual music pirates discovered during the early aughts. The more important question is "do I even own the artwork being right-clicked to begin with?" If you bought an NFT, you probably don't.
+
+#### Q. Are *That's My Ape!* chains of custody compatible with *Bored Ape Yacht Club* style licenses?
+The BAYC license states "You Own the NFT. Each Bored Ape is an NFT ... you own the underlying Bored Ape, the Art, completely." The license then goes on to place any number of restrictions on its use, implying that you don't, in fact, "own" the "underlying ... Art" at all.
+
+The BAYC license also states that "Ownership of the NFT is mediated entirely by the Smart Contract and the Ethereum Network" and "when you purchase an NFT ... you own." But it doesn't say that holding the NFT is proof of ownership. In other words, when you purchase the NFT, are you buying an *exclusive* or *non-exclusive* license? And, in either case, is that license transferable? The BAYC license defines the relationship between you (the licensee) and Yuga Labs LLC (the licensor), but doesn't explicitly state whether or not you can transfer that license to some third party. It also doesn't cover what happens when an NFT is transferred without a purchase (from which Yuga Labs LLC is presumably paid a fee), or if it can even be. Can an NFT be given as a gift? Or traded for anything other than ETH? If so, was there a "purchase" and a grant or transfer of rights?
+
+The other restrictions placed on your use of the artwork are broad. For example, you may not display the artwork for any purpose other than "your own personal, non-commercial use" or, commercially, "to produce and sell merchandise products." Other commercial displays of the art, such as to offer for sale in a marketplace, is prohibited unless the marketplace "cryptographically verifies each Bored Ape owner’s rights to display the Art."
+
+It's also not clear if the rights granted under the BYAC are exclusive and/or transferrable, and, if so, limited to transfer via the Ethereum Network. The discussion of "marketplaces" suggests the license *is* transferrable, even if not exclusive. The phrase "the actual owner" does suggest exclusivity, but, of course, "the actual owner" may simply be Yuga Labs LLC. Nor is it clear what happens if the "underlying ... Art" is changed and what happens to the NTF if it does. Indeed, no method of identifying the art in question beyond "the Smart Contract" is given.
+
+The digital signatures used by *That's My Ape!* are cryptographic and thus support a means to "cryptographically (verify) each Bored Ape owner’s rights." The missing piece is whether or not the license is transferable to third parties by means other than transacting on the Ethereum Network and thus paying Yuga Labs LLC.
+
+We suspect that the quiet part of the BAYC license is that Yuga Labs LCC expects to receive a portion of any payments made for the transaction of its licensed artwork, and that payment is, in effect, a new licensing fee paid by the buyer. So when you "sell" an NFT, *you* aren't transferring ownership at all. Yuga Labs LLC is, for a fee. Possibly, any payment you receive is consideration for you to abandon your rights to use of the artwork, but, again, the license only implies this. We might argue that the license is transferable but non-exclusive and that paying Yuga Labs LLC even once grants use of the artwork in perpetuity.
+
+Regardless, we don't think that the BAYC license would grant you sufficient proof of ownership to issue a credible DMCA takedown notice should the "underlying Art" associated with your NFT be displayed against your wishes or if Yuga Labs LLC decides to sell it to someone else. Yes, you may have a restricted license to use the art in specific circumstances, but it doesn't seem you have a license to restrict others from using that art. The party to do so would most likely be the art's actual owner, Yuga Labs LLC. And Yuga Labs LLC certainly does not promise to make its own commercial use of its art, should you be successful in promoting it for them.
+
+So no, we don't think a *That's My Ape!* chain of custody is compatible with BAYC style licenses, simply because *That's My Ape!* relies on a clear and robust initial claim of rights as an original work of authorship, a "work made for hire," or an exclusive, transferable license to use the same.
+
+#### Q. Why should I register my art with a copyright office?
+The DMCA provides legal remedies to limit the unauthorized digital distribution of your artwork, but only if that artwork has been registered. It can take a long time to get a copyright registration number, so be sure to apply as soon as you can.
+
+#### Q. Why should I need to use a key associated with a trusted digital identity for signing?
+Because legal complaints need plaintiffs, and to be a plaintiff you need an identity. A real one, not a made-up internet one.
+
+#### Q. How can I demo *That's My Ape!* if I don't yet have a trusted digital identity for some reason?
+Easy. Just generate some RSA key pairs locally using OpenSSH on the command line. *That's My Ape!* can load RSA keys stored in PKCS#1 and PKCS#8 PEM format. Alternatively, see the 'test keys' provided above.
+
+#### Q. Will you steal my private keys if I load them into the browser?
+Assume that we will and use the "sign offline" functionality instead.
+
+#### Q. I want to buy the rights to someone's artwork. Can I trust their chain of custody?
+There is no trustless way to prove ownership. If push comes to shove, you will need to appear in a court of law and identify each person on the chain of custody. So you can trust it as must as you trust each individual participant.
+
+#### Q. What happens if someone sells the same rights to multiple buyers?
+To the extent that's a real problem, it's up to you to decide how to mitigate it. For starters, only buy from reputable sellers with strong, publicly known identities. Alternatively, find some trusted third party with which to register the chain of custody. That could be a centralized service or even a distributed ledger, though we don't entirely see the point of using trustless protocols to transact fundamentally trustful legal instruments.
+
+#### Q. But wait, don't distributed ledgers exactly solve the problem of preventing double-spends in a decentralized, tamper-resistant way?
+You really ask a lot of annoying questions.
+
+#### Q. Is any of this for real?
+No. Good lord. If you want to protect your digital rights, hire a lawyer. If it wasn't immediately clear that this is a work of satire, we've got some NFTs to sell you.
 
 ## You're Welcome!
 
