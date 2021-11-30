@@ -4,7 +4,8 @@ import handlebars                               from 'handlebars';
 import { action, computed, observable }         from 'mobx';
 import * as fgc                                 from 'fgc';
 
-const STORAGE_KEY = 'thatsmyape.coc';
+const ENABLE_LOCAL_STORE    = false;
+const STORAGE_KEY           = 'thatsmyape.coc';
 
 //================================================================//
 // ChainOfCustody
@@ -93,12 +94,16 @@ export class ChainOfCustody {
     //----------------------------------------------------------------//
     @action
     restore () {
-        this.entries = fgc.storage.getItem ( STORAGE_KEY, []);
+        if ( ENABLE_LOCAL_STORE ) {
+            this.entries = fgc.storage.getItem ( STORAGE_KEY, []);
+        }
     }
 
     //----------------------------------------------------------------//
     store () {
-        fgc.storage.setItem ( STORAGE_KEY, this.entries );
+        if ( ENABLE_LOCAL_STORE ) {
+            fgc.storage.setItem ( STORAGE_KEY, this.entries );
+        }
     }
 
     //----------------------------------------------------------------//

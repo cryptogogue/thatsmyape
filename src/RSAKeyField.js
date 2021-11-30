@@ -183,22 +183,21 @@ export const RSAKeyField = observer (( props ) => {
                     onKeyPress      = { onKeyPress }
                     error           = { error }
                 />
+                <If condition = { needsPassword }>
+                    <UI.Form.Input
+                        fluid
+                        icon            = {( !Boolean ( key )) ? 'lock' : 'unlock' }
+                        iconPosition    = 'left'
+                        placeholder     = 'Password'
+                        type            = 'password'
+                        value           = { password }
+                        onChange        = { onChangePW }
+                        onBlur          = { onBlurPW }
+                        onKeyPress      = { onKeyPress }
+                        error           = { passwordError }
+                    />
+                </If>
             </div>
-
-            <If condition = { needsPassword }>
-                <UI.Form.Input
-                    fluid
-                    icon            = {( !Boolean ( key )) ? 'lock' : 'unlock' }
-                    iconPosition    = 'left'
-                    placeholder     = 'Password'
-                    type            = 'password'
-                    value           = { password }
-                    onChange        = { onChangePW }
-                    onBlur          = { onBlurPW }
-                    onKeyPress      = { onKeyPress }
-                    error           = { passwordError }
-                />
-            </If>
         </React.Fragment>
     );
 });
