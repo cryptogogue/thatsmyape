@@ -104,13 +104,13 @@ XcqZ92fEl80zgKTXLwIDAQAB
 It's a reactive web app that runs locally in your browser and uses RSA digital signatures to build chains of custody for licensed artwork. Oh, you meant what *even is* this thing. Yeah, it's a weekend hackathon/art project that questions assumptions about blockchains and NFTs.
 
 #### Q. Can I see the source code and run it locally?
-Yes. The source code for *That's My Ape!* is available here and is licensed for local, personal use.
+Yes. The source code for *That's My Ape!* is available [here](https://github.com/cryptogogue/thatsmyape) and is [licensed](https://github.com/cryptogogue/thatsmyape/blob/main/license.md) for local, personal use.
 
 #### Q. Can people really steal artwork by right-clicking?
 No. Mere possession of bytes does not prove ownership of a work, as many casual music pirates discovered during the early aughts. The more important question is "do I even own the artwork being right-clicked to begin with?" If you bought an NFT, you probably don't.
 
 #### Q. Are *That's My Ape!* chains of custody compatible with *Bored Ape Yacht Club* style licenses?
-The BAYC license states "You Own the NFT. Each Bored Ape is an NFT ... you own the underlying Bored Ape, the Art, completely." The license then goes on to place any number of restrictions on its use, implying that you don't, in fact, "own" the "underlying ... Art" at all.
+The [BAYC license](https://boredapeyachtclub.com/#/terms) states "You Own the NFT. Each Bored Ape is an NFT ... you own the underlying Bored Ape, the Art, completely." The license then goes on to place any number of restrictions on its use, implying that you don't, in fact, "own" the "underlying ... Art" at all.
 
 The BAYC license also states that "Ownership of the NFT is mediated entirely by the Smart Contract and the Ethereum Network" and "when you purchase an NFT ... you own." But it doesn't say that holding the NFT is proof of ownership. In other words, when you purchase the NFT, are you buying an *exclusive* or *non-exclusive* license? And, in either case, is that license transferable? The BAYC license defines the relationship between you (the licensee) and Yuga Labs LLC (the licensor), but doesn't explicitly state whether or not you can transfer that license to some third party. It also doesn't cover what happens when an NFT is transferred without a purchase (from which Yuga Labs LLC is presumably paid a fee), or if it can even be. Can an NFT be given as a gift? Or traded for anything other than ETH? If so, was there a "purchase" and a grant or transfer of rights?
 
