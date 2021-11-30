@@ -4,4 +4,4 @@ Does owning an NFT grant you any real ownership of the artwork it represents? Do
 
 That's why we made *That's My Ape!*, an entirely **blockchain-free** cryptographic chain of custody tool that runs locally in your browser.
 
-Try it out here!
+Try it out [here](https://thatsmyape.com)!
