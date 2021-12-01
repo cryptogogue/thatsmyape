@@ -13,7 +13,7 @@ That's why we made *That's My Ape!*, an entirely **blockchain-free** cryptograph
 
 ## What You'll Need
 
-To use *That's My Ape!*, you'll just need a **trusted digital identity** issued by a reputable **identity authority** with a corresponding RSA private key. You have one of those, right?
+To use *That's My Ape!*, you'll just need a **trusted digital identity** issued by a **reputable identity authority** with a corresponding RSA private key. You have one of those, right?
 
 You'll also need to register the work you want to protect with a copyright office, and, if you're not the author of the work, you'll need documentation showing that you purchased the work or specific rights to it. Don't skip this step - you'll be digitally signing a declaration of ownership under penalty of perjury, so if you don't actually own the work in question, that could be embarrassing for you.
 
