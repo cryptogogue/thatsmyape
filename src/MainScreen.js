@@ -45,6 +45,7 @@ export const MainScreen = observer (( props ) => {
     return (
         <div style = {{ width: '100%', height: '100%' }} { ...getRootProps ()}>
             <UI.Container>
+                <UI.Image src = '/thats-my-ape.png'/>
                 <Choose>
                     <When condition = { nav.state === NAV_STATE.NEW_CHAIN }>
                         <NewChainForm nav = { nav } chain = { chain }/>

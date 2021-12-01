@@ -5,30 +5,57 @@
 //================================================================//
 export const GENERAL_TERMS = (`
 # Declaration of Ownership and General Terms
+##### {{ DATE_TIME }}
 
-1. **Declaration of Ownership.** I, the undersigned, under penalty of perjury, declare that I am the legal owner, through authorship or purchase, of the artwork described herein (the "Artwork"). As the owner, I control an exclusive, transferrable copyright to the Artwork and, for legal purposes, the Artwork is either a) a product of my own authorship, b) was purchased as a 'work made for hire, or c) subject to certain rights (such as copyright) that were sold to me by its author or previous owner, the sale and terms of which can be shown through supporting documentation.
-2. **Descriptions of the Artwork.** Exhibit A sets forth one or more descriptions of the Artwork suitable for identifying the Artwork should a dispute over its ownership arise. The description shall include the title of the Artwork, a description of the terms and the rights owned and, optionally, a copyright registration number for the Artwork. In addition, the descrptions may include a "reference URL" and a SHA256 hash of a full-respolution depiction of the artwork as hosted on a third-party server. The description may also include a "thumbnail" of the artwork in the form of a "data URI" representing a downsampled reproduction of the artwork in JPEG format, suitable direct for viewing in a web broswer. At least one of these descriptions shall be included.
-3. **Digital Signature.** By signing this Declaration of Ownership and General Terms with a private RSA key under my exclusive control, the corresponding public key of which is set forth under "Digital Signing Identity," I am adopting the key pair used for signing as my legally binding Digital Signature, which may be used in the future to transfer ownership of the Artwork.
-4. **Technical Framework.** The text of this and future documents declaring and transferring ownership of the Artwork shall be presented in markdown format, templated using "handlebars" syntax (the "Templates"). The Templates shall be stored alongside data specific parameters that, when substituted into the Templates using the "handebars" software library (with HTML escaping disabled), will produce the final text for signing (the "Contract(s)"). Each subsequent transfer of the Artwork (or modification of the original declaration and terms) shall be appended sequentially to the text of all previously generated and signed Contracts, forming a chain of Contracts that may only be amanded by digitally signing the chain of Contracts in its entirity.
-5. **Viewing the Contract(s).** As the contracts are stored in templated markdown format, they may be composed and viewed in any suitable markdown viewer. The formatting and rendering of the markdown shall have no legal meaning; only the specific text of the Contract(s) shall be used for testing validity of any digital signatures.
-6. **Exclusivity of Transfer.** I agree not to sign or cause to be signed any transfer of ownership of the Artwork described herein to more than a single party.
-7. **Governing Law, Jurisdiction, Venue.** The terms of this and future Contract(s) shall be governed by and construed in accordance with the laws of the **{{ GOVERNING_LAW }}** without regard to conflict of laws principles. Any dispute arising under this agreement shall be settled and decided in the **{{ VENUE }}**.
-8. **Severability.** If any provision of this Declaration of Ownership and General Terms is declared to be invalid under any applicable statute or rule of law, the remaining portions will be enforced to the maximum extent allowed by law. If any provision is declared unenforceable because it is held to be unreasonable, then that provision shall be enforced to the maximum extent reasonable.
+##### Definitions
+- **“Terms”:** The initial ‘Declaration of Ownership and General Terms; i.e this document.
+- **“Artwork”:** The artwork described herein.
+- **“Thumbnail”:** A downsampled rendition of the Artwork in JPEG format, expressed as a data URI suitable for viewing in a web browser for the purpose of visually identifying the Artwork.
+- **“Owner”:** The most recent owner or exclusive rights holder to the Artwork; the Owner of record; the current or future Owner by means of transfer of rights. Further defined below.
+- **“Agent”:** An authorized Agent of the Owner. Further defined below.
+- **“Template”:** A section of text prepared for the substitution/inclusion of additional information using "handlebars" syntax (with HTML escaping disabled).
+- **“Template Parameters”:** A list of named data parameters designated for substitution into a Template.
+- **“Contract”:** A fully composed text realized by the substitution of Template Parameters into a Template (via “handlebars”-style substitution of named parameters) to produce a document to be digitally signed.
+- **“Contract Chain”:** A series of digitally signed Contracts wholly including and amending the Terms and all previous amendments in chronological order  for the purpose of selling or otherwise transferring rights.
+- **“Digital Signature”:** A legally binding signature produced by an RSA private key corresponding to a public key recorded in the Contract Chain.
+- **“Rights”:** Any exclusive or non-exclusive transferable rights held by the initial Owner and sold or transferred by amendments extending the Contract Chain.
+
+##### Declaration of Ownership
+
+I, the undersigned, under penalty of perjury, declare that I am the legal owner, through authorship or purchase, of the Artwork. As the Owner, I control an exclusive, transferrable copyright (or other rights) to the Artwork and, for legal purposes, the Artwork is either a) a product of my own authorship, b) was purchased as a 'work made for hire, or c) is subject to certain rights (such as copyright) that were sold to me by its author or previous owner, the sale and terms of which can be shown through supporting documentation.
+
+##### General Terms
+
+1. **Description(s) of the Artwork.** Exhibit A sets forth one or more descriptions of the Artwork suitable for identifying the Artwork should a dispute over its ownership arise. The description shall include the title of the Artwork, a description of the terms and the rights owned and, optionally, a copyright registration number for the Artwork. In addition, the description may include a "reference URL" and a SHA256 hash of a full-resolution depiction of the artwork as hosted on a third-party server. The description may also include a Thumbnail of the Artwork. At least one of these descriptions shall be included. If provided, the Thumbnail shall be considered the definitive source for visually identifying the Artwork.
+2. **Technical Framework.** The text of this and future documents declaring and transferring ownership of the Artwork shall be presented as Contracts derived from Templates and Template Parameters. The Contracts denoting each subsequent transfer of the Artwork (or modification of the Terms) shall be appended sequentially to the text of all previous Contracts, forming a Contract Chain that may only be amended by digitally signing the Contract Chain in its entirety. For each Contract in the Contract Chain, An RSA digital signature shall also be provided along with the Templates and Template Parameters used to compose the Contract.
+3. **Viewing the Contract Chain.** As the contracts are stored as a series of Templates and corresponding Template Parameters, they may be composed and viewed in any suitable viewer. The formatting and rendering of the Contracts shall have no legal meaning; only the specific text of the Contract Chain shall be used for testing the validity of any digital signature(s).
+4. Agency: For the purpose of enforcing Rights, including the issuance and litigation of DMCA takedown notices, the Owner grants any holder of any private key associated with any valid digital signature corresponding to any public key named in the Contract Chain a specific Power of Attorney, in perpetuity, to act as the Owner’s Agent (“Agent”) for the purposes of enforcing the Rights on behalf of the Owner. The Agent shall not be obligated to specifically identify the Owner, and proof of holding a private key through the presentation of a valid digital signature associated with any public key named in the Contract Chain shall be enough to identify the private key holder as an Agent. As compensation for enforcing the Owner’s Rights through the issuance or litigation of a DMCA takedown notice, or by any other means, Owner assigns the proceeds arising from any fines, penalties, legal fees or other damages awarded through an Agent’s efforts wholly and exclusively to the Agent. In the event the Owner or a specifically named Agent of Owner appears to enforce the Owner’s rights, I will defer to that person or entity and cease enforcement actions of my own.
+5. **Transfer.** Upon any agreement to transfer the Rights, the Owner agrees to provide a record of Transfer to the new Owner by amending the Contract Chain with a Transfer of Ownership contract naming the new Owner’s public key, at which time the new Owner shall become the Owner of record.
+6. **Consideration for Transfer.** By signing a Contract agreeing to transfer the Rights, the Owner acknowledges the receipt of good and valuable consideration in the form of a sum or value of no less than US$1.00.
+7. **Exclusivity of Transfer.** The Owner agrees to not transfer or cause to be transferred the Rights to more than one other person or legal entity and, upon transfer, for good and valuable consideration, agrees to relinquish all existing Rights and to no longer use the Artwork for any purpose other than enforcing the Rights of any future Owners as their Agent.
+8. **Disputes Over Ownership.** In the event that the Contract Chain is disputed, Ownership will be considered to follow the party that can credibly show the earliest entry or entries in the Contract Chain assigning Rights along a version of the Contract Chain that eventually designates them as the current Owner. Timestamps in the Contract Chain are for informational purposes only and are not sufficient to establish Ownership. Any other indication of time (such as email correspondence, payment receipts or copies of the Chain of Contract time-stamped or witnessed by a trusted third party) shall be considered against the timestamps for in the Contract Chain.
+9. **Legal Fees.** In the event any dispute over the Rights granted under the Contract Chain or in the execution of Agency for the purpose of pursuing or litigating a DMCA takedown notice, the prevailing party (or Agent, if acting as such) shall be entitled to reasonable fees, including attorney’s fees.
+10. **Entire Agreement.** The Contract Chain shall be the entire agreement between all parties concerning the Rights transferred and assigned herein.
+11. **Governing Law, Jurisdiction, Venue.** The terms of this and future Contract(s) shall be governed by and construed in accordance with the laws of the **{{ GOVERNING_LAW }}** without regard to conflict of laws principles. Any dispute arising under this agreement shall be settled and decided in the **{{ VENUE }}**.
+12. **Changes of Governing Law, Jurisdiction, Venue.** These Terms may be amended to change the Governing Law, Jurisdiction, Venue. Such changes shall not be applied retroactively.
+13. **Severability.** If any provision of this Declaration of Ownership and General Terms is declared to be invalid under any applicable statute or rule of law, the remaining portions will be enforced to the maximum extent allowed by law. If any provision is declared unenforceable because it is held to be unreasonable, then that provision shall be enforced to the maximum extent reasonable.
 
 ##### Digital Signing Identity
 
+{{#if OWNER_NAME}}
 - **Owner Name**: {{ OWNER_NAME }}
+{{/if}}
+{{#if OWNER_EMAIL}}
 - **Owner Email**: {{ OWNER_EMAIL }}
+{{/if}}
 
-I hereby adopt the RSA key pair, the public key of which is given below, as my legally binding signing identity for the purpose of this Declaration of Ownership and General Terms and agree that any digital signatures produced by this key pair for the purposes of agreeing to this document or any subsequent transfer of rights of modification thereof shall be legally binding in any court of law.
+By signing this Declaration of Ownership and General Terms with a private RSA key under my control, the corresponding public key of which is set forth below, I am adopting the key pair used for signing as my legally binding Digital Signature, which may be used in the future to transfer ownership of the Artwork.
 
 {{#if PUBLIC_KEY}}
 \`\`\`
 {{ PUBLIC_KEY }}
 \`\`\`
 {{/if}}
-
-##### Digitally Signed on {{ DATE_TIME }}
 
 ### Exhibit A
 
@@ -57,21 +84,43 @@ I hereby adopt the RSA key pair, the public key of which is given below, as my l
 //================================================================//
 export const TRANSFER_TITLE = (`
 # Transfer of Ownership
-### Signing Date: {{ DATE_TIME }}
+### {{ DATE_TIME }}
 
-1. **Continuation of Contract.** This transfer of ownership represents the continuiation of a chain of Contracts (the "Chain of Contracts") originating with a Declaration of Ownership and General Terms. The fully composed text of that Contract, and any subsequent modifications or transfers, shall be prepended to this Contract and incorporated therein.
-2. **Transfer of Ownership.** I, the undersigned, being the most recent owner of record of an Artwork previously described in the Chain of Contracts, hereby agree to immediately transfer any rights of ownership or use I have over said Artwork to whatever person or legal entity (the "Recipient") is the holder of the RSA private key associated with the public key set forth below as the "Recipient Identity." While the specific identity of the Recipient may not be known to me at this time, I agree that the public key set forth below was delivered to me in a credible fashion and that I believe the Recipient to be in possession of the corresponding private key. Thus, no further proof of identity is required from the Recipient. Furthermore, the Recipient, at their sole discretion, may subseqeuently transfer any rights of ownership or use granted under this Contract to any third party without restriction.
-3. **Surrender of Rights.** I hereby surrender any claim to the Arwork and agree to destory any copies of it in my possession and cease its use or publication for any purpose.
-4. **Consideration.** I acknowledge receiving good and valuable consideration for executing this Transfer of Ownership to the benefit of Recipient for a sum or value of no less that US$1.00.
-5. **Exclusivity.** Under penalty of perjury, I represent and warrant that I have made no conflicting promises, contracts or agreements of transfer for the Artwork and that Recipient shall be the sole and exclusive owner of any rights of ownership or use hereby transferred.
-6. **Representations and Warranties**. I represent and warrant that I am the sole owner of the Artwork and have full legal rights to transfer its ownership. I indemnify the Recipient against any claims arising from its transfer.
+##### Definitions
+- **“Terms”:** The initial ‘Declaration of Ownership and General Terms; i.e this document.
+- **“Artwork”:** The artwork described herein.
+- **“Thumbnail”:** A downsampled rendition of the Artwork in JPEG format, expressed as a data URI suitable for viewing in a web browser for the purpose of visually identifying the Artwork.
+- **“Owner”:** The most recent owner or exclusive rights holder to the Artwork; the Owner of record; the current or future Owner by means of transfer of rights. Further defined below.
+- **“Agent”:** An authorized Agent of the Owner. Further defined below.
+- **“Template”:** A section of text prepared for the substitution/inclusion of additional information using "handlebars" syntax (with HTML escaping disabled).
+- **“Template Parameters”:** A list of named data parameters designated for substitution into a Template.
+- **“Contract”:** A fully composed text realized by the substitution of Template Parameters into a Template (via “handlebars”-style substitution of named parameters) to produce a document to be digitally signed.
+- **“Contract Chain”:** A series of digitally signed Contracts wholly including and amending the Terms and all previous amendments in chronological order  for the purpose of selling or otherwise transferring rights.
+- **“Digital Signature”:** A legally binding signature produced by an RSA private key corresponding to a public key recorded in the Contract Chain.
+- **“Rights”:** Any exclusive or non-exclusive transferable rights held by the initial Owner and sold or transferred by amendments extending the Contract Chain.
+
+##### Declaration of Ownership
+
+I, the undersigned, under penalty of perjury, declare that I am the legal owner, through authorship or purchase, of the Artwork. As the Owner, I control an exclusive, transferrable copyright (or other rights) to the Artwork and, for legal purposes, the Artwork is either a) a product of my own authorship, b) was purchased as a 'work made for hire, or c) is subject to certain rights (such as copyright) that were sold to me by its author or previous owner, the sale and terms of which can be shown through supporting documentation.
+
+##### Declaration of Ownership
+
+1. **Continuation of Contract Chain.** This Transfer of Ownership represents the continuation of a Contract Chain originating with a Declaration of Ownership and General Terms. The fully composed text of that Contract Chain, and all terms and definitions thereof, shall be prepended to this Contract and fully incorporated herein.
+2. **Representations and Warranties**. I represent and warrant that I am the Owner of the Artwork and have full legal rights to transfer its ownership. I hereby indemnify the Recipient against any claims arising from its transfer.
+3. **Transfer of Ownership.** I, the undersigned, being the most recent Owner of record of an Artwork previously described in the Chain of Contracts, hereby agree to immediately transfer any rights of ownership or use I have over said Artwork to whatever person or legal entity (the "Recipient") is the holder of the RSA private key associated with the public key named below as the "Recipient Identity." While the specific identity of the Recipient may not be known to me at this time, I agree that the public key set forth below was delivered to me in a credible fashion and that I believe the Recipient to be in possession of the corresponding private key. Thus, no further proof of identity is required from the Recipient. Furthermore, the Recipient, at their sole discretion, may subsequently transfer any rights of ownership or use granted under this Contract Chain to any third party without restriction.
+4. **Agency**. Per the Contract Chain, Recipient agrees that I shall remain Recipient's Agent (and the Agent of any future Owners) and for the purposes of enforcing the Rights on behalf of the Owner, including the issuance and litigation of DMCA takedown notices. Recipient further agrees that all previous holders of public keys named in the Contract Chain shall also remain as their Agents for the same purpose.
+5. **Surrender of Rights.** By transferring ownership to Recipient, I hereby surrender any claims to Rights in the Artwork and agree to cease its use or publication for any purpose other than enforcing the Rights of any future Owners as their Agent.
+6. **Exclusivity.** Under penalty of perjury, I represent and warrant that I have made no conflicting promises, contracts or agreements of transfer for the Artwork and that Recipient shall be the sole and exclusive Owner of any rights of ownership or use hereby transferred.
+7. **Consideration.** I acknowledge receiving good and valuable consideration for executing this Transfer of Ownership for a sum or value of no less than US$1.00.
 {{#if CHANGE_VENUE}}
-7. **Governing Law, Jurisdiction, Venue.** The terms of this and future Contract(s) shall be governed by and construed in accordance with the laws of the **{{ GOVERNING_LAW }}** without regard to conflict of laws principles. Any dispute arising under this agreement shall be settled and decided in the **{{ VENUE }}**.
+8. **Governing Law, Jurisdiction, Venue.** The terms of this amendment and future amendments to the Contract Chain shall be governed by and construed in accordance with the laws of the **{{ GOVERNING_LAW }}** without regard to conflict of laws principles. Any dispute arising under this of future Contracts in the Contract Chain shall be settled and decided in the **{{ VENUE }}**.
 {{/if}}
 
 ##### Recipient Identity
 
-The holder of the RSA private key associated with the public key below is exclusive the Recipient of this Transfer of Ownership. The Recipient may transfer or claim the Artwork upon presentation of any digital signature generated by the corresponding private key.
+The holder of the RSA private key named below is the exclusive the Recipient of this Transfer of Ownership and, upon execution of this Transfer of Ownership shall become the Owner. The Recipient may transfer or claim the Artwork upon presentation of any digital signature generated by the corresponding private key.
+
+Recipient agrees that they provided this public key and adopts the key pair including the corresponding private key used as their legally binding Digital Signature, which may be used in the future to transfer ownership of the Artwork.
 
 {{#if PUBLIC_KEY}}
 \`\`\`
@@ -98,7 +147,7 @@ I have a good faith belief that the use of this material in such a fashion is no
 
 Under penalty of perjury in a United States court of law, I state that the information contained in this notification is accurate, and that I am authorized to act on the behalf of the exclusive rights holder for the material in question.
 
-This communication has been digitally signed by the RSA private key corresponding to the public key set forth below. In addition, find attached the digital chain of custody for the artwork in question. You will see that the public key below corresponds to the most recent ownership of record for the artwork.
+This communication has been digitally signed by the RSA private key corresponding to the public key named below. In addition, find attached the digital chain of custody for the artwork in question. You will see that the key below corresponds to a key previously named in the attached chain of custody and that, per its terms, having provided a digital signature matching the named public key, I am the Owner or an authorized Agent of the Owner.
 
 I may be contacted by the following methods:
 
